@@ -1,6 +1,7 @@
 # BlazoriseLicenseProxy
 
 A lightweight **Backend-for-Frontend (BFF)** proxy for **Blazor WebAssembly** apps that need to use **Blazorise**’s product licensing token **without embedding the secret in the client**.  
+
 This project is released under the **MIT License** so Blazorise users can freely adopt and adapt it.
 
 ---
@@ -8,10 +9,11 @@ This project is released under the **MIT License** so Blazorise users can freely
 ## ✨ Why BlazoriseLicenseProxy?
 
 Blazor WebAssembly apps are fully downloaded to the browser, so any secret you include in the bundle (or fetch directly) is visible in DevTools.  
+
 **BlazoriseLicenseProxy** solves this by:
 
 - Keeping your **Blazorise ProductToken** **on the server**.
-- Providing a small API endpoint that your demos call instead of contacting the vendor directly.
+- Providing a small API endpoint that your apps call instead of contacting the vendor directly.
 - Adding **Origin** checks, **custom headers**, and **CORS** restrictions to minimize casual misuse.
 - Offering a clean **extension method** for Blazor WASM to fetch the token at startup.
 
@@ -29,7 +31,7 @@ https://api.blazorise.com   ←── Your BlazoriseLicenseProxy (BFF)
 Vendor Licensing Service    ←── Secret never leaves server
 ```
 
-*The browser never receives the vendor token directly—only the BlazoriseLicenseProxy does.*
+*The browser never receives the vendor token directly, only the BlazoriseLicenseProxy does.*
 
 ---
 
@@ -79,7 +81,7 @@ public static class TokenFetch
     /// <summary>
     /// Fetches the product token from the licensing API using a GET request with the required header.
     /// </summary>
-    /// <param name="http">The HttpClient configured with the API base address.</param>
+    /// <param name="apiBase">The base URL of the licensing API.</param>"
     /// <returns>The product token string.</returns>
     public static async Task<string> GetProductTokenAsync( string apiBase )
     {
@@ -128,7 +130,7 @@ await builder.Build().RunAsync();
 
 ## 🔒 Security Considerations
 
-- **Secrets are still visible to your server admins**—keep your infrastructure secure.
+- **Secrets are still visible to your server admins**, keep your infrastructure secure.
 - Requests and responses **to your proxy** remain visible in DevTools, but **the vendor token never leaves the server**.
 - Add **rate limiting**, **logging**, and **monitoring** to detect abuse.
 - Rotate your ProductToken periodically.
@@ -137,7 +139,7 @@ await builder.Build().RunAsync();
 
 ## 📜 License
 
-This project is licensed under the **MIT License**—see [LICENSE](LICENSE) for details.
+This project is licensed under the **MIT License**, see [LICENSE](LICENSE) for details.
 
 ---
 
